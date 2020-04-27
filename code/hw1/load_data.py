@@ -101,7 +101,18 @@ class DataGenerator(object):
 
         #############################
         #### YOUR CODE GOES HERE ####
-        pass
+        labels_images=[]
+
+        for i in range(batch_size):
+            paths=random.sample(folders, self.num_classes)
+            labels=np.eye(self.num_classes).tolist()
+            for j in range(self.num_samples_per_class):
+                labels_images.extend(get_images(paths, labels, 1, shuffle=True))
+
+        all_image_batches=[image_file_to_array(label_image[1],784) for label_image in labels_images] 
+        all_label_batches=[label_image[0] for label_image in labels_images]
+        all_image_batches=np.reshape(all_image_batches,(batch_size, self.num_samples_per_class, self.num_classes, 784))
+        all_label_batches=np.reshape(all_label_batches, (batch_size, self.num_samples_per_class, self.num_classes, self.num_classes))
         #############################
 
         return all_image_batches, all_label_batches
