@@ -54,7 +54,8 @@ class MANN(tf.keras.Model):
         #### YOUR CODE GOES HERE ####
         pass
         #############################
-        return out
+        return #just temporary, uncommend line below after function is implemented
+        #return out
 
 ims = tf.placeholder(tf.float32, shape=(
     None, FLAGS.num_samples + 1, FLAGS.num_classes, 784))
@@ -64,6 +65,10 @@ labels = tf.placeholder(tf.float32, shape=(
 data_generator = DataGenerator(
     FLAGS.num_classes, FLAGS.num_samples + 1)
 
+#FOR TESTING FLAGS ONLY
+print(FLAGS.num_samples, FLAGS.num_classes, FLAGS.meta_batch_size)
+
+'''
 o = MANN(FLAGS.num_classes, FLAGS.num_samples + 1)
 out = o(ims, labels)
 
@@ -71,6 +76,9 @@ loss = loss_function(out, labels)
 optim = tf.train.AdamOptimizer(0.001)
 optimizer_step = optim.minimize(loss)
 
+'''
+
+'''
 with tf.Session() as sess:
     sess.run(tf.local_variables_initializer())
     sess.run(tf.global_variables_initializer())
@@ -93,3 +101,4 @@ with tf.Session() as sess:
             pred = pred[:, -1, :, :].argmax(2)
             l = l[:, -1, :, :].argmax(2)
             print("Test Accuracy", (1.0 * (pred == l)).mean())
+'''
